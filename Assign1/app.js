@@ -1,44 +1,62 @@
-let inputBox = document.getElementById("inputBox");
-let output = document.getElementById("output");
-let nodes;
+var input = document.getElementById('input');
+var Output = document.getElementById('output');
+var node = document.getElementById('node');
+let vertices;
 
-const ShowInputFields = (e) => {
-  inputBox.innerHTML = "";
-  nodes = parseInt(e.value);
-  for (let i = 0; i < nodes; i++) {
-    for (let i = 0; i < nodes; i++) {
-      inputBox.innerHTML += "<input class='valueInput' />";
+function InputFields(e) {
+  //genrating inputs
+  input.innerHTML = '';
+  vertices = parseInt(e.value);
+  for (let i = 0; i < vertices; i++) {
+    for (let i = 0; i < vertices; i++) {
+      input.innerHTML += "<input class='valueInput' />";
     }
-    inputBox.innerHTML += "<br/>";
+    input.innerHTML += '<br/>';
   }
-};
+  vertices > 0 ? (node.style.display = 'block') : (node.style.display = 'none');
+}
 
-const GenerateMatrix = () => {
-  let Inputs = document.getElementsByClassName("valueInput");
+function Matrix() {
+  //generate matrix
+  let Inputs = document.getElementsByClassName('valueInput');
   let InputValues = [];
   let Matrix = [];
   for (const element of Inputs) {
     InputValues.push(parseInt(element.value));
   }
-  while (InputValues.length) Matrix.push(InputValues.splice(0, nodes));
+  while (InputValues.length) Matrix.push(InputValues.splice(0, vertices));
   return Matrix;
-};
+}
 
-const CalculateTransitiveClosure = () => {
-  let graph = GenerateMatrix();
-  let result = [...graph];
+function TransitiveClosureAlgo() {
+  var graph = Matrix();
+  var reach = Array.from(Array(vertices), () => new Array(vertices));
+  var i, j, k;
 
-  for (let k = 0; k < nodes; k++) {
-    for (let i = 0; i < nodes; i++) {
-      for (let j = 0; j < nodes; j++) {
-        result[i][j] = result[i][j] || (result[i][k] && result[k][j]);
+  for (i = 0; i < vertices; i++)
+    for (j = 0; j < vertices; j++) reach[i][j] = graph[i][j];
+
+  for (k = 0; k < vertices; k++) {
+    for (i = 0; i < vertices; i++) {
+      for (j = 0; j < vertices; j++) {
+        reach[i][j] =
+          reach[i][j] != 0 || (reach[i][k] != 0 && reach[k][j] != 0) ? 1 : 0;
       }
     }
   }
-  for (const element of result) {
-    for (let j = 0; j < result.length; j++) {
-      output.innerHTML += element[j];
+
+  Print(reach);
+}
+
+function Print(reach) {
+  for (var i = 0; i < vertices; i++) {
+    for (var j = 0; j < vertices; j++) {
+      if (i == j) {
+        Output.innerHTML += '1 ';
+      } else {
+        Output.innerHTML += reach[i][j] + ' ';
+      }
     }
-    output.innerHTML += "<br/>";
+    Output.innerHTML += '<br/>';
   }
-};
+}

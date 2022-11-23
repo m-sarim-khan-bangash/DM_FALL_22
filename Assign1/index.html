@@ -4,43 +4,35 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>DM Assignment 1</title>
-    <style>
-      * {
-        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-      }
-      #btn {
-        background-color: #4caf50;
-        border: none;
-        color: white;
-        padding: 10px 25px;
-        text-align: center;
-        text-decoration: none;
-        display: inline-block;
-        font-size: 16px;
-        margin: 4px 2px;
-        cursor: pointer;
-      }
-      #btn:hover {
-        background-color: #105514;
-      }
-      h2 {
-        color: #170f5c;
-      }
-    </style>
+    <title>Transitive Closure (DM ASSIGNMENT #1)</title>
   </head>
   <body>
-    <h2>INPUT DATA HERE:</h2>
-    Enter Input Size:
-    <input type="number" id="nodes" onkeyup="ShowInputFields(this)" />
-    <br />
-    <br />
-    <div id="inputBox"></div>
-    <hr />
-    <button id="btn" onclick="CalculateTransitiveClosure()">Run</button>
-    <br />
-    <h2>OUTPUT:</h2>
-    <div id="output"></div>
-    <script src="./app.js"></script>
+    <section style="text-align: center">
+      <h1>Transitive Closure (DM ASSIGNMENT #1)</h1>
+    </section>
+
+    <section
+      class="ass-1"
+      style="
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+      "
+    >
+      <div>
+        Input No.of Vertices:
+        <input type="number" id="nodes" onkeyup="InputFields(this)" style="height: 5vh;"/>
+        <br />
+        <br />
+        <div id="input"></div>
+      </div>
+      <br />
+      <button onclick="TransitiveClosureAlgo()">Find Answer</button>
+      <p>Output:</p>
+      <div id="output"></div>
+    </section>
+
+    <script src="app.js"></script>
   </body>
 </html>
